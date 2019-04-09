@@ -28,9 +28,22 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Makes http fun again!
+gem 'httparty'
+
 group :development, :test do
+  # A Ruby language server.
+  gem 'solargraph'
+  # Factory Bot ♥ Rails
+  gem 'factory_bot_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
+  # RSpec for Rails-3+ http://relishapp.com/rspec/rspec-rails
+  gem 'rspec-rails', '~> 3.8'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
+  gem 'webmock', '~> 2.1'
+  gem 'rails-controller-testing'
 end
 
 group :development do
