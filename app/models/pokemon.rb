@@ -4,5 +4,4 @@ class Pokemon < ApplicationRecord
 
   # Validations
   validates :name, presence: true
-  validates :image_url, presence: true
 end

@@ -4,5 +4,4 @@ class Evolution < ApplicationRecord
 
   # Validations
   validates :name, presence: true
-  validates :image_url, presence: true
 end
