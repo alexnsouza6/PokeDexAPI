@@ -30,7 +30,7 @@ namespace :pokedex_setup do
       pokemon_name = evolution_chain["species"]["name"]
       # fetches the first pokemon in chain
       pokemon = Pokemon.find_by(name: pokemon_name)
-      have_evolution(evolution_chain)
+      have_evolution(evolution_chain, pokemon)
     end
     puts 'All done!'
   end
@@ -52,19 +52,19 @@ namespace :pokedex_setup do
     end
   end
 
-  def have_evolution(evolution_chain)
+  def have_evolution(evolution_chain, pokemon)
     unless evolution_chain["evolves_to"].empty?
       evolution_name = evolution_chain["evolves_to"][0]["species"]["name"] 
       pokemon2 = save_evolution(evolution_name, pokemon)
       
-      have_another_evolution(evolution_chain)
+      have_another_evolution(evolution_chain, pokemon2)
     end
   end
   
-  def have_another_evolution(evolution_chain)
+  def have_another_evolution(evolution_chain, pokemon)
     unless evolution_chain["evolves_to"][0]["evolves_to"].empty? 
       next_evolution_name = evolution_chain["evolves_to"][0]["evolves_to"][0]["species"]["name"] 
-      save_second_evolution(next_evolution_name, pokemon2)
+      save_second_evolution(next_evolution_name, pokemon)
     end
   end
 
