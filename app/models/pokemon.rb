@@ -1,7 +1,9 @@
 class Pokemon < ApplicationRecord
-  # Associations
-  has_many :evolutions
+  has_many :evolutions, class_name: "Pokemon",
+                          foreign_key: "evolution_id"
+ 
+  belongs_to :pokemon, class_name: "Pokemon", foreign_key: "evolution_id", optional: true
 
-  # Validations
   validates :name, presence: true
+
 end
