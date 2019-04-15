@@ -31,6 +31,9 @@ gem 'rack-cors'
 # Makes http fun again!
 gem 'httparty'
 
+# ActiveModel::Serializer implementation and Rails hooks
+gem 'active_model_serializers', '~> 0.10.0'
+
 group :development, :test do
   # A Ruby language server.
   gem 'solargraph'
