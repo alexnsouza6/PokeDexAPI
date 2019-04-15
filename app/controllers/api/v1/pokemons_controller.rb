@@ -1,3 +1,4 @@
+# API/V1/PokemonsController handles Pokemon's stuff requests such as CRUD operations
 class Api::V1::PokemonsController < ApplicationController
   def show
     @pokemon = Pokemon.find(params[:id])
@@ -5,7 +6,7 @@ class Api::V1::PokemonsController < ApplicationController
   end
 
   def index
-    @pokemons = Pokemon.all
+    @pokemons = Pokemon.all.order(:id)
     render json: @pokemons, status: 200
   end
 
@@ -38,6 +39,6 @@ class Api::V1::PokemonsController < ApplicationController
 
   private
   def pokemon_params
-    params.require(:pokemon).permit(:name)
+    params.permit(:name, :image_url)
   end
 end
