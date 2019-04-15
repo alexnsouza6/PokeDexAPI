@@ -31,8 +31,6 @@ namespace :pokedex_setup do
 
   desc "Pokedex evolutions setup for system"
   task :evolutions => :environment do 
-    puts 'Gathering evolutions...'
-    puts 'It could take a while...'
     (1..78).each do |evolution_id|
       response = HTTParty.get("https://pokeapi.co/api/v2/evolution-chain/#{evolution_id}")
       pokemon_evolution_response = JSON.parse(response.to_s)
@@ -44,7 +42,6 @@ namespace :pokedex_setup do
       pokemon = Pokemon.find_by(name: pokemon_name)
       have_evolution(evolution_chain, pokemon)
     end
-    puts 'All done!'
   end
 
   def save_evolution(evolution_name = "", pokemon)
