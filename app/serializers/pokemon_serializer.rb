@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class PokemonSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image_url, :types, :evolution_id
+  attributes :id, :name, :image_url, :types, :evolutions
 end
