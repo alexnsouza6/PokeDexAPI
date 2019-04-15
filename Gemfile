@@ -42,8 +42,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers', '~> 3.0', require: false
   # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
-  gem 'webmock', '~> 2.1'
+  gem 'webmock'
+  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.
+  gem 'vcr'
   gem 'rails-controller-testing'
+  # trategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner'
 end
 
 group :development do
