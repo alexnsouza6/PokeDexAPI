@@ -7,11 +7,9 @@ namespace :pokedex_setup do
 
   desc "Pokedex pokemons setup for system"
   task :pokemon => :environment do
-
     # Sets pokemon limit
     POKEMON_NUMBER = 151
-    puts 'Gathering Pokemons...'
-    puts 'It could take a while...'
+
     (1..POKEMON_NUMBER).each do |pokemon|
       # Makes http request to pokemon API
       response = HTTParty.get("https://pokeapi.co/api/v2/pokemon/#{pokemon}")
@@ -28,15 +26,13 @@ namespace :pokedex_setup do
                                 image_url: pokemon_data["sprites"]["front_default"],
                                 types: types                          
                                 )
-      puts "#{pokemon} loaded..."  
     end
-    puts 'All done!'
   end
 
   desc "Pokedex evolutions setup for system"
   task :evolutions => :environment do 
     puts 'Gathering evolutions...'
-    puts 'It should take a while...'
+    puts 'It could take a while...'
     (1..78).each do |evolution_id|
       response = HTTParty.get("https://pokeapi.co/api/v2/evolution-chain/#{evolution_id}")
       pokemon_evolution_response = JSON.parse(response.to_s)
@@ -55,7 +51,7 @@ namespace :pokedex_setup do
     if evolution_name
       pokemon_evolution_name = evolution_name
       pokemon_evolution = Pokemon.find_by(name: pokemon_evolution_name)
-      pokemon.evolutions << pokemon_evolution unless pokemon_evolution.nil? || pokemon.nil?
+      pokemon.update(evolutions: [pokemon_evolution]) unless pokemon_evolution.nil? || pokemon.nil?
     end
     Pokemon.find_by(name: evolution_name)
   end
@@ -64,7 +60,7 @@ namespace :pokedex_setup do
     if next_evolution_name
       pokemon_evolution_name = next_evolution_name
       pokemon_evolution = Pokemon.find_by(name: pokemon_evolution_name)
-      pokemon.evolutions << pokemon_evolution unless pokemon_evolution.nil?
+      pokemon.update(evolutions: [pokemon_evolution]) unless pokemon_evolution.nil?
     end
   end
 
