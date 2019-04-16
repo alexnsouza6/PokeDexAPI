@@ -24,6 +24,7 @@ class Api::V1::PokemonsController < ApplicationController
   def create
     @pokemon = Pokemon.new(pokemon_params)
     @pokemon.evolutions << Pokemon.find(params[:evolution_id])
+    @pokemon.types << Type.find_or_create_by(description: 'Grass')
     if @pokemon.save
       render json: @pokemon, status: 200
     else
