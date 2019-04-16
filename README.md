@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Running the application
 
-Things you may want to cover:
+First of all, its necessary to create the database, so type this inside a terminal at root of the project:
+`rails db:create db:migrate`
 
-* Ruby version
+And then `bundle install` to install all the gems.
 
-* System dependencies
+After this, we should populate the db with all the pokemons:
 
-* Configuration
+**PS:** Especifically this part may take a few minutes depending on your network connection speed:
 
-* Database creation
+`rails pokedex_setup:pokemon` and after all the pokemons got fetched, type `rails pokedex_setup:evolutions` to query all the evolutions.
 
-* Database initialization
+If it worked, you can type in your terminal: `rails console` and then `Pokemon.all` to see all the pokemons returned.
 
-* How to run the test suite
+Finally, start the server with `rails s -p 8080` **(Must initialize server with port 8080)**
 
-* Services (job queues, cache servers, search engines, etc.)
+# Tests
 
-* Deployment instructions
-
-* ...
+The application tests used RSpec framework. To run them, type:
+`bundle exec rspec spec`
