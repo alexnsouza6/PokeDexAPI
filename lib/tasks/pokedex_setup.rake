@@ -6,9 +6,8 @@ namespace :pokedex_setup do
   desc 'Pokedex pokemons setup for system'
   task pokemon: :environment do
     # Sets pokemon limit
-    POKEMON_NUMBER = 151
 
-    (1..POKEMON_NUMBER).each do |pokemon|
+    (1..151).each do |pokemon|
       # Makes http request to pokemon API
       response = HTTParty.get("https://pokeapi.co/api/v2/pokemon/#{pokemon}")
       pokemon_data = JSON.parse(response.to_s)
@@ -21,7 +20,7 @@ namespace :pokedex_setup do
 
       # Creates a pokemon in db based on JSON response and accumulated types
       Pokemon.find_or_create_by(name: pokemon_data['name'],
-                                image_url: pokemon_data['sprites']['front_default'],
+                                standard_image: pokemon_data['sprites']['front_default'],
                                 types: types)
     end
   end
