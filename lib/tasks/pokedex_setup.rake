@@ -21,7 +21,7 @@ namespace :pokedex_setup do
 
       # Creates a pokemon in db based on JSON response and accumulated types
       Pokemon.find_or_create_by(name: pokemon_data['name'],
-                                image_url: pokemon_data['sprites']['front_default'],
+                                standard_image: pokemon_data['sprites']['front_default'],
                                 types: types)
     end
   end
