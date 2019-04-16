@@ -87,7 +87,7 @@ RSpec.describe Pokemon, type: :request do
           end
         end
 
-      describe "when pokemons isnt updated correctly..." do
+      describe "when pokemons isn't updated correctly..." do
         before do 
           patch "/api/v1/pokemons/#{sketch_pokemon.id}", params: { name: '' }
         end
