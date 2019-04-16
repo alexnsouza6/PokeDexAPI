@@ -8,6 +8,7 @@ RSpec.describe Pokemon, type: :model do
     it { is_expected.to have_many(:evolutions) }
     it { is_expected.to have_many(:types).through(:pokemon_types) }
     it { is_expected.to have_many(:pokemon_types) }
+    it { is_expected.to belong_to(:pokemon) }
   end
 
   context 'when testing validations...' do
@@ -15,6 +16,7 @@ RSpec.describe Pokemon, type: :model do
   end
 
   context 'TASK: when testing tasks...' do
+    POKEMON_NUMBER = 151
     describe 'pokedex_setup:pokemon' do
       it 'saves first 151 pokemons in db' do
         VCR.use_cassette('pokemons/species') do
