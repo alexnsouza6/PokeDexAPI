@@ -34,8 +34,8 @@ gem 'httparty'
 # ActiveModel::Serializer implementation and Rails hooks
 gem 'active_model_serializers', '~> 0.10.0'
 
-#
- gem 'carrierwave'
+# Uploads images to Rails
+gem 'carrierwave'
 
 group :development, :test do
   # A Ruby language server.
@@ -60,6 +60,8 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Generate Entity-Relationship Diagrams for Rails applications
+  gem 'rails-erd'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
