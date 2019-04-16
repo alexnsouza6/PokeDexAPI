@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_12_131158) do
+ActiveRecord::Schema.define(version: 2019_04_15_230806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_04_12_131158) do
     t.datetime "updated_at", null: false
     t.bigint "evolution_id"
     t.string "image_url"
+    t.string "standard_image"
     t.index ["evolution_id"], name: "index_pokemons_on_evolution_id"
   end
 
