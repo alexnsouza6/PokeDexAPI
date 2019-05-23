@@ -54,6 +54,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   # trategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
   gem 'database_cleaner'
+  gem 'simplecov-json'
 end
 
 group :development do
@@ -63,6 +64,7 @@ group :development do
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'simplecov-json'
 end
 
 
