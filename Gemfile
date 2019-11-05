@@ -64,7 +64,6 @@ group :development do
   # Generate Entity-Relationship Diagrams for Rails applications
   gem 'rails-erd'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'simplecov-json'
 end
 
 

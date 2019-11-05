@@ -3,8 +3,8 @@
 # API/V1/PokemonsController handles Pokemon's stuff requests such as CRUD operations
 class Api::V1::PokemonsController < ApplicationController
   def show
-    @pokemon = Pokemon.find(params[:id])
-    render json: @pokemon, status: 200
+    pokemon = Pokemon.find(params[:id])
+    render json: pokemon, status: 200
   end
 
   def index
@@ -22,13 +22,11 @@ class Api::V1::PokemonsController < ApplicationController
   end
 
   def create
-    @pokemon = Pokemon.new(pokemon_params)
-    @pokemon.evolutions << Pokemon.find(params[:evolution_id])
-    @pokemon.types << Type.find_or_create_by(description: 'Grass')
-    if @pokemon.save
-      render json: @pokemon, status: 200
+    pokemon = Pokemon.new(pokemon_params)
+    if pokemon.save
+      render json: pokemon, status: 200
     else
-      render json: { "error": [@pokemon.errors.full_messages] }.to_json, status: 422
+      render json: { "error": [pokemon.errors.full_messages] }.to_json, status: 422
     end
   end
 

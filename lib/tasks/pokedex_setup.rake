@@ -28,13 +28,13 @@ namespace :pokedex_setup do
   desc 'Pokedex evolutions setup for system'
   task evolutions: :environment do
     (1..78).each do |evolution_id|
+      # Makes http request to pokemon API to get evolutions
       response = HTTParty.get("https://pokeapi.co/api/v2/evolution-chain/#{evolution_id}")
       pokemon_evolution_response = JSON.parse(response.to_s)
       evolution_chain = pokemon_evolution_response['chain']
 
       # parses pokemon name
       pokemon_name = evolution_chain['species']['name']
-      # byebug if pokemon_name == 'eevee'
       # fetches the first pokemon in chain
       pokemon = Pokemon.find_by(name: pokemon_name)
       have_evolution(evolution_chain, pokemon)
