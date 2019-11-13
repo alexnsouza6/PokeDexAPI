@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_230806) do
+ActiveRecord::Schema.define(version: 2019_11_12_235339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "moves", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pokemon_moves", force: :cascade do |t|
+    t.bigint "pokemon_id"
+    t.bigint "move_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["move_id"], name: "index_pokemon_moves_on_move_id"
+    t.index ["pokemon_id"], name: "index_pokemon_moves_on_pokemon_id"
+  end
 
   create_table "pokemon_types", force: :cascade do |t|
     t.bigint "pokemon_id"
@@ -31,7 +46,18 @@ ActiveRecord::Schema.define(version: 2019_04_15_230806) do
     t.bigint "evolution_id"
     t.string "image_url"
     t.string "standard_image"
+    t.integer "height"
+    t.integer "weight"
     t.index ["evolution_id"], name: "index_pokemons_on_evolution_id"
+  end
+
+  create_table "stats", force: :cascade do |t|
+    t.bigint "pokemon_id"
+    t.string "name"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_stats_on_pokemon_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -40,6 +66,9 @@ ActiveRecord::Schema.define(version: 2019_04_15_230806) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pokemon_moves", "moves"
+  add_foreign_key "pokemon_moves", "pokemons"
   add_foreign_key "pokemon_types", "pokemons"
   add_foreign_key "pokemon_types", "types"
+  add_foreign_key "stats", "pokemons"
 end

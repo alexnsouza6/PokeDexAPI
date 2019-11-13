@@ -18,10 +18,25 @@ namespace :pokedex_setup do
         types << Type.find_or_create_by(description: pokemon_type['type']['name'])
       end
 
+      moves = []
+      pokemon_data['moves'][0...4].each do |pokemon_move|
+        moves << Move.find_or_create_by(name: pokemon_move['move']['name'])
+      end
+
+      stats = []
+      pokemon_data['stats'].each do |pokemon_move|
+        stats << Stat.find_or_create_by(name: pokemon_move['stat']['name'],
+                                        value: pokemon_move['base_stat'].to_i)
+      end
+      
       # Creates a pokemon in db based on JSON response and accumulated types
-      Pokemon.find_or_create_by(name: pokemon_data['name'],
-                                standard_image: pokemon_data['sprites']['front_default'],
-                                types: types)
+      Pokemon.create!(name: pokemon_data['name'],
+                      standard_image: pokemon_data['sprites']['front_default'],
+                      height: pokemon_data['height'].to_i,
+                      weight: pokemon_data['weight'].to_i,
+                      types: types,
+                      stats: stats,
+                      moves: moves)
     end
   end
 
