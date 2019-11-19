@@ -28,7 +28,7 @@ namespace :pokedex_setup do
         stats << Stat.find_or_create_by(name: pokemon_move['stat']['name'],
                                         value: pokemon_move['base_stat'].to_i)
       end
-      
+
       # Creates a pokemon in db based on JSON response and accumulated types
       Pokemon.create!(name: pokemon_data['name'],
                       standard_image: pokemon_data['sprites']['front_default'],
@@ -53,6 +53,40 @@ namespace :pokedex_setup do
       # fetches the first pokemon in chain
       pokemon = Pokemon.find_by(name: pokemon_name)
       have_evolution(evolution_chain, pokemon)
+    end
+  end
+
+  desc 'Pokedex items setup for system'
+  task items: :environment do
+    (1..200).each do |item_id|
+      # Makes http request to pokemon API to get evolutions
+      response = HTTParty.get("https://pokeapi.co/api/v2/item/#{item_id}")
+      item_response = JSON.parse(response.to_s)
+
+      # Creates a item instance
+      Item.create!(name: item_response['name'],
+                   effect: item_response['effect_entries'][0]['effect'],
+                   short_description: item_response['effect_entries'][0]['short_effect'],
+                   description: item_response['flavor_text_entries'][2]['text'],
+                   image_url: item_response['sprites']['default'])
+
+      puts "Created #{item_id} item(s)"
+    end
+  end
+
+
+  desc 'Pokedex abilities for system'
+  task abilities: :environment do
+    (1..100).each do |ability_id|
+      # Makes http request to pokemon API to get evolutions
+      response = HTTParty.get("https://pokeapi.co/api/v2/ability/#{ability_id}")
+      ability_response = JSON.parse(response.to_s)
+
+      # Creates a item instance
+      Ability.create!(name: ability_response['name'],
+                      description: ability_response['effect_entries'][0]['effect'],
+                      short_description: ability_response['effect_entries'][0]['short_effect'])
+      puts "Created #{ability_id} ability(ies)"
     end
   end
 
@@ -92,4 +126,6 @@ namespace :pokedex_setup do
       save_second_evolution(next_evolution_name, pokemon)
     end
   end
+
+
 end
