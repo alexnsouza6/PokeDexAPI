@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :pokemons
+      get 'items/index'
+      get 'abilities/index'
       post '/find-pokemon' => 'pokemons#find_pokemon'
     end
   end
