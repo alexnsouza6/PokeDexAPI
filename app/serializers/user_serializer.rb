@@ -3,10 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def pokemons
     object.pokemons.map do |pokemon|
-      {
-        pokemon: pokemon,
-        types: pokemon.types
-      }
+      PokemonSerializer.new(pokemon)
     end
   end
 end
