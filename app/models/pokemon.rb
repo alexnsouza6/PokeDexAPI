@@ -18,6 +18,9 @@ class Pokemon < ApplicationRecord
   has_many :pokemon_moves, dependent: :destroy
   has_many :moves, through: :pokemon_moves
 
+  has_many :users, through: :user_pokemons
+  has_many :user_pokemons, dependent: :destroy
+
   # Validations
   validates :name, presence: true
 
